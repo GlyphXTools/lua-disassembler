@@ -1,4 +1,4 @@
-# Lua diassembler
+# Lua disassembler
 
 luadisasm is a lua disassembler for Lua 5.0 and 5.1 object files. It produces semi-human readable lua assembly.
 
