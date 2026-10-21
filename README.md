@@ -1,4 +1,5 @@
 # Lua disassembler
+[![build](https://github.com/GlyphXTools/lua-disassembler/actions/workflows/build.yml/badge.svg)](https://github.com/GlyphXTools/lua-disassembler/actions/workflows/build.yml?query=branch%3Amain)
 
 luadisasm is a lua disassembler for Lua 5.0 and 5.1 object files. It produces semi-human readable lua assembly.
 

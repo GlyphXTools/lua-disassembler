@@ -1,0 +1,38 @@
+name: build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+env:
+  SOLUTION_FILE_PATH: .
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        build_config: ['Debug','Release']
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Restore NuGet packages
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: nuget restore ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Build ${{matrix.build_config}}|Win32
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild /m /p:Configuration=${{matrix.build_config}} /p:Platform=Win32 ${{env.SOLUTION_FILE_PATH}}
